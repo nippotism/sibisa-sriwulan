@@ -18,6 +18,13 @@ const config = {
       },
     },
     extend: {
+      fontFamily: {
+        poppins: ['var(--font-poppins)'],
+        inter: ['var(--font-inter)'],
+        montserrat: ['var(--font-montserrat)'],
+        raleway: ['var(--font-raleway)'],
+        freehand: ['var(--font-freehand)'],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

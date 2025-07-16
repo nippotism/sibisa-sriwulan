@@ -22,7 +22,7 @@ const SelamatDatang = () => {
             className="rounded-xl md:hidden md:px-0"
           />
         </div>
-        <p className="text-pretty text-justify md:w-1/3 w-full md:px-0 px-8 md:text-2xl text-lg text-[#3C5480]">
+        <p className="text-pretty text-justify md:w-1/3 w-full md:px-0 px-8 md:text-2xl text-lg text-[#3C5480] font-raleway font-extralight">
           Desa Sriwulan terletak di Kecamatan Limbangan, Kendal, Jawa Tengah,
           terkenal dengan keindahan alamnya, terutama di Desa Wisata Arenan
           Kalikesek. Namun, masalah limbah dari aktivitas masyarakat, wisata,
