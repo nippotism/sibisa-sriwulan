@@ -1,5 +1,6 @@
 import React from "react";
 import city from "/public/images/city.png";
+import gambar from "public/images/sibisa.jpg"
 
 const LandingPage = () => {
   return (
@@ -14,7 +15,7 @@ const LandingPage = () => {
         data-aos="fade-down"
         data-aos-duration="1500"
       >
-        <h1 className="md:text-8xl text-4xl font-bold">DESA SRIWULAN</h1>
+        <h1 className="md:text-9xl text-9xl font-freehand tracking-wide">Desa Sriwulan</h1>
         <h2 className="md:text-4xl text-2xl">The land of enchantment</h2>
       </div>
     </div>
