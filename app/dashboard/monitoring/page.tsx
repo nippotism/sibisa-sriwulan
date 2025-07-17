@@ -166,28 +166,42 @@ const TemperatureMonitor: React.FC = () => {
     onValue(
       sensorDataRef,
       (snapshot) => {
-        const data = snapshot.val();
+        const data = snapshot.val(); 
 
         if (data) {
+          console.log(data)
           const now = Date.now();
-          const threeHoursAgo = now - 3 * 60 * 60 * 1000;
+          const threeHoursAgo = now - 3 * 60 * 60 *1000;
 
           const filteredTemperatureData: { x: number; y: number }[] = [];
           const filteredHumidityData: { x: number; y: number }[] = [];
 
           Object.keys(data).forEach((timestamp) => {
-            const timestampMillis = parseInt(timestamp, 10);
+            const timestampMillis = parseInt(data[timestamp].timestamp, 10)*1000;
+            console.log(timestampMillis)
+            console.log(timestampMillis >= threeHoursAgo)
+            console.log(timestampMillis +">=" + now)
+            console.log(timestampMillis  + ">=" + threeHoursAgo)
 
-            if (timestampMillis >= threeHoursAgo && timestampMillis <= now) {
+            
+            
+            // if (timestampMillis >= threeHoursAgo && timestampMillis <= now) {
+              console.log("konto");
+              const gmt7OffsetInMillis = 7 * 60 * 60 * 1000;
+
+              // Subtract the offset to get the UTC timestamp
+              const utcTimestampMillis = timestampMillis - gmt7OffsetInMillis;
+
               filteredTemperatureData.push({
-                x: timestampMillis,
+                x: utcTimestampMillis,
                 y: data[timestamp].temperature,
               });
+
               filteredHumidityData.push({
-                x: timestampMillis,
+                x: utcTimestampMillis,
                 y: data[timestamp].humidity,
               });
-            }
+            // }
           });
 
           setTemperatureData(filteredTemperatureData);
