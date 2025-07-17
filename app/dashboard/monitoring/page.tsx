@@ -26,14 +26,14 @@ import { Button } from "@/components/ui/button";
 
 // Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyBkQ840T4Y3XS7Kx-7RRrv1G7UNW6N-v2s",
-  authDomain: "ppk-bemft.firebaseapp.com",
-  databaseURL: "https://ppk-bemft-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "ppk-bemft",
-  storageBucket: "ppk-bemft.appspot.com",
-  messagingSenderId: "139150074196",
-  appId: "1:139150074196:web:b8d868072daaf6f75128c1",
-  measurementId: "G-C93XSZ63D8"
+  apiKey: "AIzaSyAxMTNf0CxNi90-UQftBUpMGTimVzHu8tY",
+  authDomain: "kknbelajar-8d518.firebaseapp.com",
+  databaseURL: "https://kknbelajar-8d518-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "kknbelajar-8d518",
+  storageBucket: "kknbelajar-8d518.firebasestorage.app",
+  messagingSenderId: "714353011191",
+  appId: "1:714353011191:web:e5f73708910b1d86fb26f2",
+  measurementId: "G-BT968RDP5E"
 };
 
 // Initialize Firebase
