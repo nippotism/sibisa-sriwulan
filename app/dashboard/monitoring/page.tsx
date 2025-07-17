@@ -24,19 +24,18 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 
-// Firebase configuration
+// Firebase config
 const firebaseConfig = {
   apiKey: "AIzaSyAxMTNf0CxNi90-UQftBUpMGTimVzHu8tY",
   authDomain: "kknbelajar-8d518.firebaseapp.com",
   databaseURL: "https://kknbelajar-8d518-default-rtdb.asia-southeast1.firebasedatabase.app",
   projectId: "kknbelajar-8d518",
-  storageBucket: "kknbelajar-8d518.firebasestorage.app",
+  storageBucket: "kknbelajar-8d518.appspot.com",
   messagingSenderId: "714353011191",
   appId: "1:714353011191:web:e5f73708910b1d86fb26f2",
   measurementId: "G-BT968RDP5E"
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
@@ -103,25 +102,18 @@ const formatDate = (timestamp: number): string => {
 };
 
 const TemperatureMonitor: React.FC = () => {
-  const [temperatureData, setTemperatureData] = useState<
-    { x: number; y: number }[]
-  >([]);
-  const [humidityData, setHumidityData] = useState<{ x: number; y: number }[]>(
-    []
-  );
-  const [lastFertilizerTime, setLastFertilizerTime] = useState<number | null>(
-    null
-  );
-  const [lastFertilizerDate, setLastFertilizerDate] = useState<string | null>(
-    null
-  );
+  const [temperatureData, setTemperatureData] = useState<{ x: number; y: number }[]>([]);
+  const [humidityData, setHumidityData] = useState<{ x: number; y: number }[]>([]);
+  const [lastFertilizerTime, setLastFertilizerTime] = useState<number | null>(null);
+  const [lastFertilizerDate, setLastFertilizerDate] = useState<string | null>(null);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [timeRangeHours, setTimeRangeHours] = useState(3); // Default: 3 hours
 
   useEffect(() => {
     const storedFertilizerTime = localStorage.getItem("lastFertilizerTime");
     if (storedFertilizerTime) {
       const lastFertilizerTimeMillis = parseInt(storedFertilizerTime, 10);
-      const countdownEnd = lastFertilizerTimeMillis + 3 * 24 * 60 * 60 * 1000; // 3 days in milliseconds
+      const countdownEnd = lastFertilizerTimeMillis + 3 * 24 * 60 * 60 * 1000;
 
       if (Date.now() < countdownEnd) {
         setLastFertilizerTime(lastFertilizerTimeMillis);
@@ -149,9 +141,7 @@ const TemperatureMonitor: React.FC = () => {
         if (data) {
           Object.keys(data).forEach(async (timestamp) => {
             const timestampMillis = parseInt(timestamp, 10);
-
             if (timestampMillis < oneWeekAgo) {
-              // Hapus data yang lebih dari satu minggu
               await remove(ref(database, `/sensorData/${timestamp}`));
             }
           });
@@ -163,45 +153,31 @@ const TemperatureMonitor: React.FC = () => {
 
     cleanupOldData();
 
-    onValue(
+    const unsubscribe = onValue(
       sensorDataRef,
       (snapshot) => {
-        const data = snapshot.val(); 
-
+        const data = snapshot.val();
         if (data) {
-          console.log(data)
           const now = Date.now();
-          const threeHoursAgo = now - 3 * 60 * 60 *1000;
-
+          const startTime = now - timeRangeHours * 60 * 60 * 1000;
           const filteredTemperatureData: { x: number; y: number }[] = [];
           const filteredHumidityData: { x: number; y: number }[] = [];
 
-          Object.keys(data).forEach((timestamp) => {
-            const timestampMillis = parseInt(data[timestamp].timestamp, 10)*1000;
-            console.log(timestampMillis)
-            console.log(timestampMillis >= threeHoursAgo)
-            console.log(timestampMillis +">=" + now)
-            console.log(timestampMillis  + ">=" + threeHoursAgo)
+          Object.keys(data).forEach((key) => {
+            const timestampMillis = parseInt(data[key].timestamp, 10) * 1000;
+            const gmt7Offset = 7 * 60 * 60 * 1000;
+            const utcTimestamp = timestampMillis - gmt7Offset;
 
-            
-            
-            // if (timestampMillis >= threeHoursAgo && timestampMillis <= now) {
-              console.log("konto");
-              const gmt7OffsetInMillis = 7 * 60 * 60 * 1000;
-
-              // Subtract the offset to get the UTC timestamp
-              const utcTimestampMillis = timestampMillis - gmt7OffsetInMillis;
-
+            if (utcTimestamp >= startTime && utcTimestamp <= now) {
               filteredTemperatureData.push({
-                x: utcTimestampMillis,
-                y: data[timestamp].temperature,
+                x: utcTimestamp,
+                y: data[key].temperature,
               });
-
               filteredHumidityData.push({
-                x: utcTimestampMillis,
-                y: data[timestamp].humidity,
+                x: utcTimestamp,
+                y: data[key].humidity,
               });
-            // }
+            }
           });
 
           setTemperatureData(filteredTemperatureData);
@@ -214,19 +190,16 @@ const TemperatureMonitor: React.FC = () => {
         console.error("Error fetching data:", error);
       }
     );
-  }, []);
+
+    return () => unsubscribe();
+  }, [timeRangeHours]);
 
   useEffect(() => {
     if (lastFertilizerTime) {
-      const countdownEnd = lastFertilizerTime + 3 * 24 * 60 * 60 * 1000; // 3 days in milliseconds
+      const countdownEnd = lastFertilizerTime + 3 * 24 * 60 * 60 * 1000;
       const intervalId = setInterval(() => {
         const remainingTime = countdownEnd - Date.now();
-        console.log(
-          `Countdown: ${Math.max(remainingTime / 1000, 0).toFixed(0)} seconds`
-        );
-
         if (remainingTime <= 0) {
-          // Hapus semua data setelah 3 hari
           setTemperatureData([]);
           setHumidityData([]);
           setLastFertilizerTime(null);
@@ -244,8 +217,11 @@ const TemperatureMonitor: React.FC = () => {
     temperatureData.length > 0
       ? temperatureData[temperatureData.length - 1].y
       : "N/A";
+
   const latestHumidity =
-    humidityData.length > 0 ? humidityData[humidityData.length - 1].y : "N/A";
+    humidityData.length > 0
+      ? humidityData[humidityData.length - 1].y
+      : "N/A";
 
   const handleFertilizerSubmit = () => {
     const now = Date.now();
@@ -260,7 +236,7 @@ const TemperatureMonitor: React.FC = () => {
       {
         label: "Suhu (°C)",
         data: temperatureData,
-        borderColor: "#34D399", // Tailwind Green
+        borderColor: "#34D399",
         backgroundColor: "rgba(52, 211, 153, 0.2)",
         fill: true,
       },
@@ -272,7 +248,7 @@ const TemperatureMonitor: React.FC = () => {
       {
         label: "Kelembapan (%)",
         data: humidityData,
-        borderColor: "#3B82F6", // Tailwind Blue
+        borderColor: "#3B82F6",
         backgroundColor: "rgba(59, 130, 246, 0.2)",
         fill: true,
       },
@@ -282,9 +258,23 @@ const TemperatureMonitor: React.FC = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 p-4">
       <div className="w-full max-w-2xl bg-white p-6 rounded-lg shadow-md">
-        <h1 className="text-2xl font-bold text-center mb-4">
-          Monitor Suhu dan Kelembapan
-        </h1>
+        <div className="flex justify-between items-center mb-4">
+          <h1 className="text-2xl font-bold">Monitor Suhu dan Kelembapan</h1>
+          <div>
+            <label htmlFor="timeRange" className="mr-2 text-sm font-medium text-gray-700">Rentang Waktu:</label>
+            <select
+              id="timeRange"
+              value={timeRangeHours}
+              onChange={(e) => setTimeRangeHours(parseInt(e.target.value))}
+              className="border border-gray-300 rounded px-2 py-1 text-sm"
+            >
+              <option value={3}>3 Jam</option>
+              <option value={5}>5 Jam</option>
+              <option value={10}>10 Jam</option>
+              <option value={24}>1 Hari</option>
+            </select>
+          </div>
+        </div>
         <div className="mb-6">
           <h2 className="text-xl font-semibold mb-2">Grafik Suhu</h2>
           <Line data={tempChartData} options={options} />
@@ -309,8 +299,7 @@ const TemperatureMonitor: React.FC = () => {
           <DialogHeader>
             <DialogTitle>Pengingat Pengisian Pupuk</DialogTitle>
             <DialogDescription>
-              Waktu pengisian pupuk telah berakhir. Silakan isi pupuk untuk
-              memulai periode baru.
+              Waktu pengisian pupuk telah berakhir. Silakan isi pupuk untuk memulai periode baru.
             </DialogDescription>
           </DialogHeader>
           <div className="flex justify-end mt-4">
