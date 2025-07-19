@@ -10,7 +10,7 @@ const SelamatDatang = () => {
         <div className="border-t-4 border-transparent w-1/12"></div>
         <div className="border-t-4 border-[#BF5638] w-2/12"></div>
       </div>
-      <h1 className="text-[#3C5480] text-center md:text-4xl text-2xl md:px-0 px-16 font-medium my-12">
+      <h1 className="text-white dark:text-black text-center md:text-4xl text-2xl md:px-0 px-16 font-medium my-12 font-montserrat">
         Selamat Datang Di <span className="font-bold">Desa Sriwulan</span>
       </h1>
       <div className="flex md:flex-row flex-col justify-center gap-8">
@@ -22,7 +22,7 @@ const SelamatDatang = () => {
             className="rounded-xl md:hidden md:px-0"
           />
         </div>
-        <p className="text-pretty text-justify md:w-1/3 w-full md:px-0 px-8 md:text-2xl text-lg text-[#3C5480] font-raleway font-extralight">
+        <p className="text-pretty text-justify md:w-1/3 w-full md:px-0 px-8 md:text-2xl text-lg text-white dark:text-black font-montserrat font-light">
           Desa Sriwulan terletak di Kecamatan Limbangan, Kendal, Jawa Tengah,
           terkenal dengan keindahan alamnya, terutama di Desa Wisata Arenan
           Kalikesek. Namun, masalah limbah dari aktivitas masyarakat, wisata,

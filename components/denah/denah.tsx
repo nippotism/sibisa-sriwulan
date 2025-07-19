@@ -3,7 +3,7 @@ import React from "react";
 const Denah: React.FC = () => {
   return (
     <>
-      <h1 className="text-[#3C5480] md:text-3xl text-xl mt-4 font-medium text-center">
+      <h1 className="text-white dark:text-black md:text-3xl text-xl mt-4 font-medium text-center">
         Titik Rumah <span className="font-bold">Digital</span>
       </h1>
       <div className="flex flex-col items-center mt-8">

@@ -3,7 +3,7 @@ import React from "react";
 const AkhirKata = () => {
   return (
     <>
-      <div className="text-[#3C5480] text-center my-12 flex flex-col items-center">
+      <div className="text-white dark:text-black text-center my-12 flex flex-col items-center">
         <h1 className="font-medium md:text-3xl text-2xl">
           Akhir <span className="font-bold">Kata</span>
         </h1>

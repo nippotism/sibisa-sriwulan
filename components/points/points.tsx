@@ -35,7 +35,7 @@ const points: Point[] = [
 ];
 
 const Points = () => (
-  <div className="flex flex-row text-2xl text-[#3C5480] text-justify  justify-center">
+  <div className="flex flex-row text-2xl dark:text-black text-white text-justify  justify-center font-montserrat">
     <Image src={farmer} className="md:block hidden" alt="farmer" width={400} />
     <div className="mt-16 md:w-7/12 px-4 md:px-0 flex flex-col justify-start ">
       <p className="mb-8 md:text-3xl text-lg">

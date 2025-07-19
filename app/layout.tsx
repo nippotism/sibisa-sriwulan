@@ -50,9 +50,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`poppins.className bg-[#EBFFFF]` + ` ${inter.variable} ${montserrat.variable} ${raleway.variable} ${freehand.variable}`}>
-        <NavMobile />
-        <NavbarDesktop />
+      <body className={`scroll-smooth font-montserrat bg-gray-950 dark:bg-white` + ` ${inter.variable} ${montserrat.variable} ${raleway.variable} ${freehand.variable}`}>
+        {/* <NavMobile /> */}
+        {/* <NavbarDesktop /> */}
         {children}
       </body>
     </html>

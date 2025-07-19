@@ -22,7 +22,7 @@ const data3R = [
 
 const Box3R = () => {
   return (
-    <div className="relative flex lg:flex-row space-y-6 px-4 flex-col justify-evenly items-center">
+    <div className="relative flex lg:flex-row space-y-6 px-4 flex-col justify-evenly items-center font-montserrat">
       <Image
         src={element}
         alt="titik"
@@ -33,7 +33,7 @@ const Box3R = () => {
       {data3R.map((item, index) => (
         <div
           key={index}
-          className="bg-white text-[#3C5480] w-72 lg:w-96 lg:h-96  space-y-4 shadow-2xl px-6 py-16 rounded-2xl z-10"
+          className="dark:bg-white bg-gray-900 text-white dark:text-black border-spacing-2 border-black w-72 lg:w-96 lg:h-96  space-y-4 shadow-2xl px-6 py-16 rounded-2xl z-10"
         >
           <h1 className="font-semibold md:text-3xl text-2xl text-center">
             {item.title}

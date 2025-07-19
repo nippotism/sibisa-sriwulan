@@ -5,10 +5,10 @@ import logo from "/public/images/logo-sibisa.png";
 const About = () => {
   return (
     <>
-      <div className="bg-[#C9FFFF]">
+      <div className="dark:bg-gray-950 bg-white">
         <div className="flex md:flex-row flex-col justify-center items-center">
           <Image src={logo} alt="logo" width={400} />
-          <div className="text-[#3C5480] md:w-1/2 md:px-0 px-4 space-y-12">
+          <div className="dark:text-white text-black md:w-1/2 md:px-0 px-4 space-y-12 font-montserrat">
             <h1 className="text-center md:text-left font-medium text-4xl">
               Tentang <span className="font-bold">SIBISA</span>
             </h1>

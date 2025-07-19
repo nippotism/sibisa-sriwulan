@@ -1,4 +1,5 @@
 import { Instagram, Mail } from "lucide-react";
+import Link from "next/link";
 import React from "react";
 
 const Footer = () => {
@@ -24,10 +25,16 @@ const Footer = () => {
         </div>
         <div className="space-y-2">
           <h1 className="font-bold text-3xl">FITUR</h1>
-          <ul className="space-y-2">
-            <li>Monitoring</li>
-            <li>Bank Sampah</li>
-          </ul>
+          <div>
+              <a href="/dashboard/monitoring" className="block px-4 py-2">
+                Monitoring
+              </a>
+          </div>
+          <div>
+              <a href="/dashboard" className="block px-4 py-2">
+                Bank Sampah
+              </a>
+          </div>
         </div>
         <div>
           <h1 className="text-lg font-bold mb-2">LOCATION</h1>
