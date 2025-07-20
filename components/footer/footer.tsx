@@ -57,8 +57,8 @@ const Footer = () => {
         </div>
       </div>
       <div>
-        <h1 className="text-center font-medium md:text-lg text-xs">
-          © Copyright 2024 | PPK ORMAWA BEM FT UNDIP
+        <h1 className="text-center font-medium md:text-lg text-xs text-white dark:text-black">
+          © Copyright 2024 | PPK ORMAWA BEM FT UNDIP | KKNT UNDIP 2025
         </h1>
       </div>
     </>

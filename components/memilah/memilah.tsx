@@ -1,5 +1,10 @@
 import React from "react";
-import {Accordion, AccordionItem} from "@heroui/accordion";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import accordionData from "@/lib/constant/accordion";
 import Box3R from "../box/box";
 import Points from "../points/points";
@@ -8,29 +13,37 @@ const memilah = () => {
   return (
     <>
       <div className="mx-auto flex items-center w-10/12 my-8">
-        <div className="border-t-4 dark:border-gray-800 border-gray-100 w-9/12"></div>
+        <div className="border-t-4 border-gray-400 w-9/12"></div>
         <div className="border-t-4 border-transparent w-1/12"></div>
-        <div className="border-t-4 dark:border-gray-800 border-gray-100 w-2/12"></div>
+        <div className="border-t-4 border-gray-400 w-2/12"></div>
       </div>
       <div>
-        <h1 className="text-white dark:text-gray-800 font-montserrat font-medium md:text-4xl text-2xl text-center my-8">
+        <h1 className="text-white dark:text-black font-medium md:text-4xl text-2xl text-center my-8">
           Tahapan Memilah <span className="font-bold">Sampah</span>
         </h1>
       </div>
       <div className="w-10/12 mx-auto">
-        <Accordion className="text-white dark:text-gray-800 font-montserrat" variant="light">
+        <Accordion type="single" collapsible className="w-full">
           {accordionData.map((item, index) => (
             <AccordionItem
               key={index}
-              title={item.title}
-              className="text-xl text-left font-semibold"
+              value={`item-${index + 1}`}
+              className="text-white dark:text-black dark:bg-white bg-gray-900 border-4 border-gray-400 dark:border-gray-950 rounded-2xl p-2 mb-4"
             >
-              {item.content}
+              <AccordionTrigger className="font-bold md:text-xl text-lg text-left">
+                {item.title}
+              </AccordionTrigger>
+              <AccordionContent>
+                <hr className="border-t-4 border-gray-400" />
+                <p className="text-justify md:text-xl text-sm mt-4 text-white dark:text-black">
+                  {item.content}
+                </p>
+              </AccordionContent>
             </AccordionItem>
           ))}
         </Accordion>
       </div>
-      <div className="flex flex-col items-center text-white dark:text-black font-montserrat">
+      <div className="flex flex-col items-center text-white dark:text-black">
         <h1 className="font-medium md:text-4xl text-xl text-center mt-8">
           Memilah Sampah <span className="font-bold">Anorganik</span>
         </h1>
@@ -48,7 +61,7 @@ const memilah = () => {
         </p>
       </div>
       <Box3R />
-      <div className="z-10 relative mt-20 flex flex-col items-center dark:text-black text-white space-y-8 font-montserrat " id="fermentasi">
+      <div className="z-10 relative mt-20 flex flex-col items-center text-white dark:text-black space-y-8 " id="fermentasi">
         <h1 className="md:text-4xl text-2xl font-medium px-4">
           Pengolahan Limbah Organik Atau{" "}
           <span className="font-bold">Fermentasi Pupuk</span>

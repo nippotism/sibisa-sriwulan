@@ -6,9 +6,9 @@ const SelamatDatang = () => {
   return (
     <div className="mb-8">
       <div className="mx-auto flex items-center w-10/12 my-8">
-        <div className="border-t-4 border-[#BF5638] w-9/12"></div>
+        <div className="border-t-4 border-gray-400 w-9/12"></div>
         <div className="border-t-4 border-transparent w-1/12"></div>
-        <div className="border-t-4 border-[#BF5638] w-2/12"></div>
+        <div className="border-t-4 border-gray-400 w-2/12"></div>
       </div>
       <h1 className="text-white dark:text-black text-center md:text-4xl text-2xl md:px-0 px-16 font-medium my-12 font-montserrat">
         Selamat Datang Di <span className="font-bold">Desa Sriwulan</span>
