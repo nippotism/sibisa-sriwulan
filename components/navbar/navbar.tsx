@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { Activity, Compass, House, LogOutIcon } from "lucide-react";
+import { Activity, Compass, House, LogOutIcon,FileSpreadsheet } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { logout } from "@/app/logout/actions";
@@ -28,6 +28,15 @@ const Navbar = () => {
             Monitoring
           </div>
         </Link>
+        <a
+          href="https://docs.google.com/spreadsheets/d/1hyyoJQPLwHS1hFUEee_yfh7S1qclQ9wUENcuGgSiLVg/edit?usp=sharing"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex flex-col items-center"
+        >
+          <FileSpreadsheet />
+          Akuntansi
+        </a>
         <form action={logout} className="flex flex-col items-center">
           <LogOutIcon />
           <button type="submit">Keluar</button>
@@ -38,3 +47,5 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+
