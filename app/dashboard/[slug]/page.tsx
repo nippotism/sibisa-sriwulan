@@ -134,13 +134,13 @@ const DetailPage: React.FC<DetailPageProps> = ({ params }) => {
 
   return (
     <div>
-      <div className="flex flex-row justify-center items-center px-2">
+      <div className="flex flex-row justify-center items-center px-2 bg-gray-50">
         <h1 className="md:text-3xl text-2xl font-bold">
           Perbarui Jumlah Sampah & Points
         </h1>
         <Image src={looking} alt="looking" />
       </div>
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center bg-gray-50">
         {user ? (
           <div>
             <div className="py-3 w-72 px-2 bg-[#3C5480] rounded-xl text-white mb-4">
@@ -234,7 +234,7 @@ const DetailPage: React.FC<DetailPageProps> = ({ params }) => {
                 </div>
               </div>
             </div>
-            <div className="flex gap-4">
+            <div className="flex justify-center gap-4 mb-3">
               <Button
                 className="bg-[#BACC58] w-24 hover:bg-[#a1b04d]"
                 onClick={handleSubmit}

@@ -35,7 +35,7 @@ const Navbar = () => {
           className="flex flex-col items-center"
         >
           <FileSpreadsheet />
-          Akuntansi
+          Pencatatan
         </a>
         <form action={logout} className="flex flex-col items-center">
           <LogOutIcon />
