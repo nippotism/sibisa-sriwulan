@@ -165,27 +165,27 @@ const DetailPage: React.FC<DetailPageProps> = ({ params }) => {
             <div className="w-72 mb-4">
               <h2 className="font-bold mb-2">Jumlah Sampah</h2>
               <div className="bg-[#3C5480] rounded-xl text-black p-4">
-                {[
+                {([
                   ["Besi", besi, setBesi],
                   ["Kaca", kaca, setKaca],
                   ["Kertas", kertas, setKertas],
                   ["Plastik", plastik, setPlastik],
                   ["Sterofoam", sterofoam, setSterofoam],
-                ].map(([label, value, setter]) => (
-                  <div key={label} className="flex justify-between mb-2">
-                    <label className="text-white">{label} (kg):</label>
-                    <input
-                      type="number"
-                      value={value as number}
-                      onChange={(e) =>
-                        (setter as React.Dispatch<React.SetStateAction<number>>)(
-                          parseFloat(e.target.value)
-                        )
-                      }
-                      className="bg-blue rounded-xl px-2 w-24 py-2 border-2 border-[#BACC58]"
-                    />
-                  </div>
-                ))}
+                ] as [string, number, React.Dispatch<React.SetStateAction<number>>][]).map(
+                  ([label, value, setter]) => (
+                    <div key={label} className="flex justify-between mb-2">
+                      <label className="text-white">{label} (kg):</label>
+                      <input
+                        type="number"
+                        value={value}
+                        onChange={(e) =>
+                          setter(parseFloat(e.target.value))
+                        }
+                        className="bg-blue rounded-xl px-2 w-24 py-2 border-2 border-[#BACC58]"
+                      />
+                    </div>
+                  )
+                )}
               </div>
             </div>
 
