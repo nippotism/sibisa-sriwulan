@@ -5,8 +5,15 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react"; // home icon
 import { FaMedal } from "react-icons/fa"; // badge icons
 
+type User = {
+  id: string;
+  name: string;
+  totalPoints: number;
+  totalWeight: number;
+};
+
 export default function LeaderboardPage() {
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState<User[]>([]);
 
   useEffect(() => {
     async function fetchUsers() {
