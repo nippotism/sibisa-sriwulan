@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
-const SUPABASE_PROJECT_REF = 'xlcylvyzpxkutspcyafx'
+const SUPABASE_PROJECT_REF = 'ffynlivkctlcmwckashq'
 const AUTH_COOKIE_NAME = `sb-${SUPABASE_PROJECT_REF}-auth-token`
 
 export function middleware(request: NextRequest) {

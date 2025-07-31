@@ -1,9 +1,10 @@
 import NavbarDesktop from "@/components/navbar/navbar-desktop";
 import NavMobile from "@/components/navbar/navbar-mobile";
+import NextTopLoader from "nextjs-toploader";
 import type { Metadata } from "next";
 import { Poppins, Inter, Montserrat, Raleway, Freehand } from "next/font/google";
 import "./globals.css";
-
+  
 const poppins = Poppins({
   subsets: ["latin"],
   variable: "--font-poppins",
@@ -53,6 +54,11 @@ export default function RootLayout({
       <body className={`scroll-smooth font-montserrat bg-gray-950 dark:bg-white` + ` ${inter.variable} ${montserrat.variable} ${raleway.variable} ${freehand.variable}`}>
         {/* <NavMobile /> */}
         {/* <NavbarDesktop /> */}
+        <NextTopLoader
+          color="#424242"
+          height={2}
+          showSpinner={false}
+        />
         {children}
       </body>
     </html>

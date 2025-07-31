@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { Activity, Compass, House, LogOutIcon,FileSpreadsheet } from "lucide-react";
+import { Activity,Settings, House, LogOutIcon,FileSpreadsheet } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { logout } from "@/app/logout/actions";
@@ -37,6 +37,12 @@ const Navbar = () => {
           <FileSpreadsheet />
           Pencatatan
         </a>
+        <Link href="/dashboard/settings">
+          <div className="flex flex-col items-center">
+            <Settings />
+            Pengaturan
+          </div>
+        </Link>
         <form action={logout} className="flex flex-col items-center">
           <LogOutIcon />
           <button type="submit">Keluar</button>

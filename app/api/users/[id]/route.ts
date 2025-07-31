@@ -57,24 +57,47 @@ export async function PUT(
       );
     }
 
-    const totalWeight = besi + kaca + kertas + plastik + sterofoam;
-    const totalPoints =
-      besi * 5000 +
-      kaca * 4000 +
-      kertas * 3000 +
-      plastik * 2000 +
-      sterofoam * 1000;
+    // Get the existing user
+    const existingUser = await prisma.user.findUnique({
+      where: { id: parseInt(id) },
+    });
 
+    if (!existingUser) {
+      return NextResponse.json({ error: "User not found" }, { status: 404 });
+    }
+
+    // Accumulate new values
+    const updatedBesi = (existingUser.besi || 0) + besi;
+    const updatedKaca = (existingUser.kaca || 0) + kaca;
+    const updatedKertas = (existingUser.kertas || 0) + kertas;
+    const updatedPlastik = (existingUser.plastik || 0) + plastik;
+    const updatedSterofoam = (existingUser.sterofoam || 0) + sterofoam;
+
+    const updatedTotalWeight =
+      updatedBesi +
+      updatedKaca +
+      updatedKertas +
+      updatedPlastik +
+      updatedSterofoam;
+
+    const updatedTotalPoints =
+      updatedBesi * 5000 +
+      updatedKaca * 4000 +
+      updatedKertas * 3000 +
+      updatedPlastik * 2000 +
+      updatedSterofoam * 1000;
+
+    // Update the user
     const updatedUser = await prisma.user.update({
       where: { id: parseInt(id) },
       data: {
-        besi,
-        kaca,
-        kertas,
-        plastik,
-        sterofoam,
-        totalWeight,
-        totalPoints,
+        besi: updatedBesi,
+        kaca: updatedKaca,
+        kertas: updatedKertas,
+        plastik: updatedPlastik,
+        sterofoam: updatedSterofoam,
+        totalWeight: updatedTotalWeight,
+        totalPoints: updatedTotalPoints,
       },
     });
 
@@ -86,7 +109,7 @@ export async function PUT(
       { status: 500 }
     );
   }
-}
+} 
 
 export async function DELETE(
   request: Request,

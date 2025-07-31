@@ -3,12 +3,14 @@
 import React, { useState, useEffect, ChangeEvent } from "react";
 import writing from "/public/images/writing.png";
 import Image from "next/image";
-import { Search, Trash, UserRound } from "lucide-react";
+import { Search, Trash, UserRound, ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import FormWithPopover from "@/components/form/form";
 import { ConfirmDeleteModal } from "@/components/deleteModals/DeleteModals";
 import logo from "/public/images/logo-sibisa.png";
 import * as XLSX from "xlsx";
+import { redirect } from 'next/navigation'
+import { createClient } from '@/utils/supabase/server'
 
 interface User {
   id: number;
@@ -17,16 +19,22 @@ interface User {
 }
 
 const Dashboard: React.FC = () => {
+
+  
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [data, setData] = useState<User[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [selectedUserId, setSelectedUserId] = useState<number | null>(null);
 
+  
+
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch("/api/users");
+        console.log("Response:", response);
         const result = await response.json();
         setData(result);
       } catch (error) {
@@ -78,6 +86,13 @@ const Dashboard: React.FC = () => {
     <div className="bg-[#D4D5D5] h-screen w-full px-4">
       <div className="flex flex-row items-center justify-center md:space-x-56 space-x-8">
         <div>
+          <Link
+                href="/"
+                className="flex items-center gap-2 text-[#3C5480] hover:underline mb-4"
+              >
+                <ArrowLeft />
+                <span className="font-medium">Kembali ke Home</span>
+              </Link>
           <h1 className="font-bold md:text-4xl text-2xl">Hi, Admin!</h1>
           <div className="flex flex-col items-center mt-4">
             <button

@@ -1,6 +1,7 @@
 import { Instagram, Mail } from "lucide-react";
 import Link from "next/link";
 import React from "react";
+import SaranButton from "../saranButton/saran";
 
 const Footer = () => {
   return (
@@ -34,6 +35,14 @@ const Footer = () => {
               <a href="/dashboard" className="block px-4 py-2">
                 Bank Sampah
               </a>
+          </div>
+          <div>
+              <a href="/peringkat" className="block px-4 py-2">
+                Peringkat
+              </a>
+          </div>
+          <div>
+              <SaranButton />
           </div>
         </div>
         <div>

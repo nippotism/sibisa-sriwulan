@@ -1,36 +1,33 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
   directUrl = env("DIRECT_URL")
 }
 
-
 model User {
-  id           Int      @id @default(autoincrement())
-  name         String
-  email        String?   @unique
-  numberPhone  String?
-  beratSampah  Float    @default(0)
-  besi         Float    @default(0)
-  kaca         Float    @default(0)
-  kertas       Float    @default(0)
-  plastik      Float    @default(0)
-  sterofoam    Float    @default(0)
-  totalWeight  Float    @default(0) // Total weight of all waste types in kg
-  totalPoints  Int      @default(0) // Total accumulated points based on waste types
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  id          Int      @id @default(autoincrement())
+  name        String
+  email       String?  @unique
+  numberPhone String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  besi        Float    @default(0)
+  kaca        Float    @default(0)
+  kertas      Float    @default(0)
+  plastik     Float    @default(0)
+  sterofoam   Float    @default(0)
+  totalPoints Int      @default(0)
+  totalWeight Float    @default(0)
+  beratSampah Float    @default(0)
 }
 
-
-
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model whatsapp {
+  id         BigInt   @id @default(autoincrement())
+  created_at DateTime @default(now()) @db.Timestamptz(6)
+  number     String?
+}
