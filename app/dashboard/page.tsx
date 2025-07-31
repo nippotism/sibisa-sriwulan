@@ -45,7 +45,7 @@ const Dashboard: React.FC = () => {
     };
 
     fetchData();
-    const intervalId = setInterval(fetchData, 1000); // Polling setiap 1 detik
+    const intervalId = setInterval(fetchData, 5000); // Polling setiap 1 detik
 
     return () => clearInterval(intervalId);
   }, []);
